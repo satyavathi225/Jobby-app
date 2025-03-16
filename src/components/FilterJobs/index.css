@@ -1,8 +1,26 @@
 .filter-jobs-container {
-  margin-top: 16px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  position: sticky;
+  top: 0;
+  height: 100vh; 
+  overflow-y: auto; 
+}
+
+/* It Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+.filter-jobs-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* It Hide scrollbar for Firefox */
+.filter-jobs-container {
+  scrollbar-width: none;
+}
+
+/* It Hide scrollbar for Internet Explorer and Edge */
+.filter-jobs-container {
+  -ms-overflow-style: none;
 }
 
 @media screen and (min-width: 768px) {

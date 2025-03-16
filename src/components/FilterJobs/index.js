@@ -104,6 +104,41 @@ const FilterJobs = props => {
       </div>
     )
   }
+
+  const renderTypeOfLocation = () => {
+    const {locationTypesList, onSelectLocation, selectedLocations} = props
+    return (
+      <div className="employment-type-container">
+        <h1 className="type-of-employment-heading">Type of Location</h1>
+        <ul className="employment-type-list">
+          {locationTypesList.map(locationType => (
+            <li
+              className="employment-type-item"
+              key={locationType.locationTypeId}
+            >
+              <input
+                className="check-box"
+                type="checkbox"
+                checked={selectedLocations.includes(
+                  locationType.locationTypeId,
+                )} // Make sure it stays checked
+                value={locationType.locationTypeId}
+                id={locationType.locationTypeId}
+                onChange={event => onSelectLocation(event.target.id)}
+              />
+              <label
+                className="label-text"
+                htmlFor={locationType.locationTypeId}
+              >
+                {locationType.label}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
   return (
     <div className="filter-jobs-container">
       {renderSearchInput()}
@@ -112,6 +147,8 @@ const FilterJobs = props => {
       {renderTypeOfEmployment()}
       <hr className="line" />
       {renderSalaryrange()}
+      <hr className="line" />
+      {renderTypeOfLocation()}
     </div>
   )
 }

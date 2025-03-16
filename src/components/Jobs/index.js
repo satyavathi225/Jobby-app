@@ -26,6 +26,29 @@ const employmentTypesList = [
   },
 ]
 
+const locationTypesList = [
+  {
+    label: 'Hyderabad',
+    locationTypeId: 'Hyderabad',
+  },
+  {
+    label: 'Bangalore',
+    locationTypeId: 'Bangalore',
+  },
+  {
+    label: 'Chennai',
+    locationTypeId: 'Chennai',
+  },
+  {
+    label: 'Delhi',
+    locationTypeId: 'Delhi',
+  },
+  {
+    label: 'Mumbai',
+    locationTypeId: 'Mumbai',
+  },
+]
+
 const salaryRangesList = [
   {
     salaryRangeId: '1000000',
@@ -56,6 +79,7 @@ class Jobs extends Component {
   state = {
     jobsList: [],
     employmentType: [],
+    selectedLocations: [],
     minimumPackage: 0,
     searchInput: '',
     apiStatus: apiStatusConstant.initial,
@@ -67,8 +91,14 @@ class Jobs extends Component {
 
   getJobsList = async () => {
     this.setState({apiStatus: apiStatusConstant.inProcess})
-    const {employmentType, minimumPackage, searchInput} = this.state
+    const {
+      employmentType,
+      minimumPackage,
+      searchInput,
+      selectedLocations,
+    } = this.state
     const jwtToken = Cookies.get('jwt_token')
+    console.log(jwtToken)
     const profileApiUrl = `https://apis.ccbp.in/jobs?employment_type=${employmentType.join()}&minimum_package=${minimumPackage}&search=${searchInput}`
     const options = {
       method: 'GET',
@@ -89,35 +119,33 @@ class Jobs extends Component {
         rating: eachJob.rating,
         title: eachJob.title,
       }))
+      // It will apply both salary and location filters
       const filteredJobs = updatedData.filter(job => {
-        const packageValue = parseInt(job.packagePerAnnum.split(' ')[0], 10) // Extract number from "10 LPA"
-
+        const packageValue = parseInt(job.packagePerAnnum.split(' ')[0], 10) // Extract LPA value
+        let matchesSalary = true
         if (minimumPackage === '1000000') {
-          // Filter for salaries between 10 LPA and 20 LPA
-          return packageValue >= 10 && packageValue < 20
+          matchesSalary = packageValue >= 10 && packageValue < 20
+        } else if (minimumPackage === '2000000') {
+          matchesSalary = packageValue >= 20 && packageValue < 30
+        } else if (minimumPackage === '3000000') {
+          matchesSalary = packageValue >= 30 && packageValue < 40
+        } else if (minimumPackage === '4000000') {
+          matchesSalary = packageValue >= 40
         }
-        if (minimumPackage === '2000000') {
-          // Filter for salaries between 20 LPA and 30 LPA
-          return packageValue >= 20 && packageValue < 30
-        }
-        if (minimumPackage === '3000000') {
-          // Filter for salaries between 30 LPA and 40 LPA
-          return packageValue >= 30 && packageValue < 40
-        }
-        if (minimumPackage === '4000000') {
-          // Filter for salaries 40 LPA and above
-          return packageValue >= 40
-        }
-        return true // No salary filter applied
+
+        const matchesLocation =
+          selectedLocations.length === 0 ||
+          selectedLocations.includes(job.location)
+
+        return matchesSalary && matchesLocation
       })
+
       this.setState({
         jobsList: filteredJobs,
         apiStatus: apiStatusConstant.success,
       })
     } else {
-      this.setState({
-        apiStatus: apiStatusConstant.failure,
-      })
+      this.setState({apiStatus: apiStatusConstant.failure})
     }
   }
 
@@ -135,6 +163,20 @@ class Jobs extends Component {
 
   onSelectSalaryRange = id => {
     this.setState({minimumPackage: id}, this.getJobsList)
+  }
+
+  onSelectLocation = id => {
+    this.setState(prevState => {
+      const {selectedLocations} = prevState
+      const isSelected = selectedLocations.includes(id)
+
+      // Add or remove the selected location
+      const updatedLocations = isSelected
+        ? selectedLocations.filter(location => location !== id)
+        : [...selectedLocations, id]
+
+      return {selectedLocations: updatedLocations}
+    }, this.getJobsList) // Call API after updating state
   }
 
   onSearchInput = event => {
@@ -181,7 +223,7 @@ class Jobs extends Component {
 
   renderJobsList = () => {
     const {jobsList} = this.state
-
+    console.log(jobsList)
     const isJobAvailable = jobsList.length > 0
 
     return isJobAvailable ? (
@@ -222,17 +264,25 @@ class Jobs extends Component {
   }
 
   render() {
-    const {minimumPackage, searchInput, profileDetails} = this.state
+    const {
+      minimumPackage,
+      searchInput,
+      profileDetails,
+      selectedLocations,
+    } = this.state
     return (
       <>
         <Header />
         <div className="job-route-container">
           <div className="jobs-content">
             <FilterJobs
+              locationTypesList={locationTypesList}
+              selectedLocations={selectedLocations}
               employmentTypesList={employmentTypesList}
               salaryRangesList={salaryRangesList}
               onSelectEmploymentType={this.onSelectEmploymentType}
               onSelectSalaryRange={this.onSelectSalaryRange}
+              onSelectLocation={this.onSelectLocation}
               searchInput={searchInput}
               onSearchInput={this.onSearchInput}
               getJobsList={this.getJobsList}
