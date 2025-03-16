@@ -1,0 +1,137 @@
+.filter-jobs-container {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+@media screen and (min-width: 768px) {
+  .filter-jobs-container {
+    width: 30%;
+    max-width: 300px;
+    min-width: 240px;
+    flex-shrink: 0;
+  }
+}
+.type-of-employment-heading {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .type-of-employment-heading {
+    font-size: 20px;
+  }
+}
+.employment-type-container {
+  display: flex;
+  flex-direction: column;
+}
+.employment-type-list {
+  list-style-type: none;
+  padding-left: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.employment-type-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border: solid;
+  list-style-type: none;
+}
+
+.label-text {
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Roboto';
+  margin-right: 10px;
+}
+
+.salary-range-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.salary-range-heading {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .salary-range-heading {
+    font-size: 20px;
+  }
+}
+
+.salary-range-list {
+  list-style-type: none;
+  padding-left: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.salary-range-item {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+.search-input-container {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border: 1px solid #7e858e;
+  max-width: 300px;
+}
+
+@media screen and (min-width: 768px) {
+  .search-input-container {
+    display: none;
+  }
+}
+
+.search-box {
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  border: none;
+  outline: 0;
+  flex: 1;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+}
+
+.search-button {
+  background-color: #202020;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin: 0px;
+}
+
+.search-icon {
+  color: #ffffff;
+  width: 15px;
+  height: 15px;
+}
+
+.line {
+  background-color: #ffffff;
+}

@@ -1,0 +1,137 @@
+.job-item {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: #202020;
+}
+
+.job-title-location-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.company-name-container {
+  display: flex;
+  align-items: center;
+}
+
+.company-logo {
+  width: 70px;
+  height: 70px;
+  margin-right: 20px;
+}
+
+.title-rating-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.job-title {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  padding-top: 0px;
+}
+
+.rating-icon {
+  color: #fbbf24;
+  margin-right: 10px;
+}
+
+.job-rating {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.job-location-package-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.job-location-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.location-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.location-icon {
+  color: #ffffff;
+  margin-right: 5px;
+  height: 20px;
+  width: 20px;
+}
+
+.location {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 10px;
+}
+
+.employment-type-card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.brief-case-icon {
+  color: #ffffff;
+  margin-right: 5px;
+  height: 15px;
+  width: 15px;
+}
+
+.emoloyment-type {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 10px;
+}
+
+.package-annum {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.line {
+  color: #ffffff;
+  width: 100%;
+  border: 1px;
+}
+
+.description-heading {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.job-description {
+  color: #f1f5f9;
+  font-family: 'Roboto';
+  font-size: 12px;
+  line-height: 1.6;
+}
